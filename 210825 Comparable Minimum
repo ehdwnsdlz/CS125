@@ -1,0 +1,29 @@
+// "static void main" must be defined in a public class.
+class Minimum {
+    public static int min(int[] values) {
+        if (values ==  null || values.length == 0) {
+            return 0;
+        }
+        if (values.length == 1) {
+            return values[0];
+        }
+        int currentMinimum = values[0];
+        for (int i=1; i < values.length; i++){
+            if (values[i] < currentMinimum) {
+                currentMinimum = values[i];
+            }
+        }
+        return currentMinimum;
+    }
+  /*  public static Comparable min(Comparable[] values) {
+        return values[0];
+    }
+  */  
+}
+public class Main {
+    public static void main(String[] unused) {
+        System.out.println(Minimum.min(new int[] {1, 2, 5, -4}));
+     //   System.out.println(Minimum.min(new String[] {"one", "two", "five"}));
+     //   System.out.println(Minimum.min(new Integer[] {"1", "2", "5"}));
+    }
+}
