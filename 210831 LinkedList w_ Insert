@@ -1,0 +1,67 @@
+// "static void main" must be defined in a public class.
+
+/*interface SimpleList {
+  Object get(int index);
+  void set(int index, Object element);
+  void add(int index, Object element);
+  Object remove(int index);
+  int size();
+}
+*/
+//class SimpleLinkedList implements SimpleList {
+class SimpleLinkedList{
+    class Item {
+        Object value;
+        Item next;
+        Item(Object setValue, Item setNext) {
+            value = setValue;
+            next = setNext;
+        }
+    }
+    private Item start;
+    public SimpleLinkedList(Object[] array) {
+        for (int i = array.length - 1; i >= 0; i--) {
+            this.addToFront(array[i]);
+        }
+    }
+    public void addToFront(Object value) {
+        start = new Item(value, start);
+    } 
+    public void printList() {
+        for (Item current = start; current != null; current = current.next) {
+            System.out.println(current.value);
+            if(current.next != null) {
+                System.out.println("(Next, " + current.next.value + ")");    
+            }
+            else {
+                System.out.println("(Next, END)");
+                System.out.println("Start value " + start.value);
+            }
+        }
+    }
+    public void insertList(Object value, int index) {
+        if (index < 1) {
+            System.out.println("Index less than 1 is not valid");
+            return;
+        }
+        Item current = start;
+        for (int i = 1; i < index; i++) {
+            if (current.next == null) {
+                System.out.println("Max num. index: " + i);
+                break;
+            }
+            current = current.next;
+        }
+        
+        current.next = new Item(value, current.next);
+    }
+
+}
+public class Main {
+    public static void main(String[] args) {
+        SimpleLinkedList myList = new SimpleLinkedList(new Integer[] {2, 5, 8});
+//        myList.printList();
+        myList.insertList(new Integer(3),8);
+        myList.printList();
+    }
+} 
