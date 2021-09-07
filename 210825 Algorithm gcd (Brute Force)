@@ -1,0 +1,25 @@
+// "static void main" must be defined in a public class.
+class SimpleMath {
+    public static int count;
+    public static int gcd(int first, int second) {
+        count = 0; 
+        int smaller =first;
+        if(second < first) {
+            smaller = second;
+        }
+        //int candidate= smaller;
+        for (int candidate= smaller; candidate > 1; candidate--) {
+            count++;
+            if (first % candidate == 0 && second % candidate == 0) {
+                return candidate;
+            }
+        }
+        return 1;
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        System.out.println(SimpleMath.gcd(185,2045));
+        System.out.println(SimpleMath.count);
+    }
+}
