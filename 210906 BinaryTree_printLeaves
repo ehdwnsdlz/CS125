@@ -1,0 +1,94 @@
+// understand add method
+// write size method
+
+//BinarayTree_size_mod
+//make the recursion to end at null
+
+import java.util.Random;
+class BinaryTree {
+    private static Random random = new Random();
+    private class Node {
+        private Object value;
+        private Node right;
+        private Node left;
+        Node(Object setValue) {
+            value = setValue;
+        }
+    }
+    private Node root;
+    BinaryTree(Object[] values) {
+//            int count = 0;
+        for (Object value : values) {
+//            count++;
+            add(root, value);
+//            System.out.println(value);
+        }
+    }
+    public void add(Object value) {
+        add(root, value);
+    }
+    private void add(Node current, Object value) {
+        if (current == null) {
+            root = new Node(value);
+            return;
+        }
+        if (random.nextBoolean()) {
+            if (current.right == null) {
+                current.right = new Node(value);
+            }
+            else {
+                add(current.right, value);
+            }
+        }
+        else {
+            if (current.left == null) {
+                current.left = new Node(value);
+            } 
+            else {
+                add(current.left, value);
+            }
+        }
+    }
+    public int size() {
+        return size(root);
+    }
+    private int size(Node current) {
+        if (current == null) {
+            return 0;
+        }
+        return 1 + size(current.left) + size(current.right);
+    }
+    public String toString() {
+        return toString(root);
+    }
+    private String toString(Node current) {
+        if (current == null) {
+            return "";
+        }
+        return "[" + current.value.toString() + "]"
+        + toString(current.right) + toString(current.left);
+    }
+    public void printLeaves() {
+        printLeaves(root);
+    }
+    private void printLeaves(Node current) {
+        if (current == null) {
+            return;
+        }
+        if (current.left == null && current.right == null) {
+            System.out.println(current.value);
+            return;
+        }
+            printLeaves(current.left);    
+            printLeaves(current.right);    
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        BinaryTree tree = new BinaryTree(new Integer[] {1, 2, 5, 8, 9, 10});
+    System.out.println(tree.size());
+    System.out.println(tree);
+    tree.printLeaves();
+    }
+}
